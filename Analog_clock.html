@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(2, 11, 14);
+
+        }
+
+        .container {
+            position: sticky;
+            top:10px;
+            border: 2px solid rgb(34, 138, 126);
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 100px cyan;
+            animation: move infinite ease-in 2s ;
+        }
+        @keyframes move {
+            50% {
+                transform: scaleX(30deg);
+            }
+            100%
+            {
+                transform: rotate3d(30deg);
+            }
+
+        }
+
+        .clock {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aqua;
+            border-radius: 50%;
+            border: 2px solid rgb(41, 71, 71);
+            box-shadow: 0 0 30px;
+        }
+
+        .clock span {
+            position: absolute;
+            transform: rotate(calc(30deg * var(--i)));
+            inset: 12px;
+            text-align: center;
+        }
+
+        .clock span b {
+            transform: rotate(calc(-30deg *var(--i)));
+            display: inline-block;
+            font-size: 30px;
+        }
+
+        .clock::before {
+            content: "";
+            position: absolute;
+            background-color: #110101;
+            width: 6px;
+            height: 5px;
+            border-radius: 10px;
+        }
+
+        .hand i {
+            position: absolute;
+            width: 3px;
+            height: 75px;
+            background-color: var(--clr);
+            border-radius: 10px;
+        }
+
+        .hand {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hand2 i {
+            position: absolute;
+            width: 3px;
+            height: 95px;
+            background-color: var(--clr);
+            border-radius: 10px;
+        }
+
+        .hand2 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hand1 i {
+            position: absolute;
+            width: 3px;
+            height: 85px;
+            background-color: var(--clr);
+            border-radius: 10px;
+        }
+
+        .hand1 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id = "cont">
+        <div class="clock">
+            <span style="--i:1;"><b>1</b></span>
+            <span style="--i:2;"><b>2</b></span>
+            <span style="--i:3;"><b>3</b></span>
+            <span style="--i:4;"><b>4</b></span>
+            <span style="--i:5;"><b>5</b></span>
+            <span style="--i:6;"><b>6</b></span>
+            <span style="--i:7;"><b>7</b></span>
+            <span style="--i:8;"><b>8</b></span>
+            <span style="--i:9;"><b>9</b></span>
+            <span style="--i:10;"><b>10</b></span>
+            <span style="--i:11;"><b>11</b></span>
+            <span style="--i:12;"><b>12</b></span>
+            <div id="hr"  class="hand" style="--clr: rgb(176, 46, 46);"><i></i></div>
+            <div id="min" class="hand1" style="--clr:rgb(33, 35, 33);"><i></i></div>
+            <div id="sec" class="hand2" style="--clr:rgb(150, 191, 150);"><i></i></div>
+        </div>
+    </div>
+
+    <script>
+        let hr = document.getElementById("hr");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+
+    function displayTime()
+    {
+        let date = new Date();
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+
+        let hRotation = 30*hh + mm/2;
+        let mRotation = 6*mm;
+        let SRotatin  = 6*ss;
+
+        hr.style.transform = `rotate(${hRotation}deg)`;
+        min.style.transform = `rotate(${mRotation}deg)`;
+        sec.style.transform = `rotate(${SRotatin}deg)`;
+    }
+    setInterval(displayTime,1000);
+
+    
+
+    </script>
+</body>
+
+</html>
